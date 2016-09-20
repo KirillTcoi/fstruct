@@ -14,9 +14,10 @@ namespace test
             while (q == false)
                 nicepro();
         }
+        public static Song[] songs = new Song[10];
         static void nicepro()
         {
-            Song[] songs = new Song[10];
+            
             Console.Clear();
             Console.WriteLine("Выберите действие:\r\n1. Плейлист\r\n2. Новая песня\r\n3. Удалить песню");
             ConsoleKeyInfo x = Console.ReadKey();
