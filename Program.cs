@@ -8,11 +8,13 @@ namespace test
 {  
     class Program
     {
+        public static int nm = 1;
         public static bool q = false;
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             while (q == false)
                 nicepro();
+            return 0;
         }
         public static Song[] songs = new Song[10];
         static void nicepro()
@@ -30,9 +32,14 @@ namespace test
             switch (y)
             {
                 case 1: //Плейлист
+                    nm = 1;
                     if (songs[0].rate != 0)
                         foreach (Song s in songs)
+                        {
+                            
                             s.Info();
+                            nm++;
+                        }
                     else
                         Console.WriteLine("Песни отсуствуют в плейлисте");
                     Console.ReadKey();
@@ -46,8 +53,9 @@ namespace test
                     break;
                 case 3: //Удаление песни
                     Console.WriteLine("Введите номер песни, которую хотите удалить"); //замутить выход
-                    int iddel = int.Parse(Console.ReadLine()) +1;
-                    songs[iddel].DelSong();
+                    int del = int.Parse(Console.ReadLine());
+                    for (int i = del; i < 9; i++)
+                        songs[i-1] = songs[i];
                     n--;
                     break;
                 default:
@@ -66,7 +74,10 @@ namespace test
         public void Info()
         {
             if (rate != 0)
+            {
+                Console.Write(Program.nm + ". ");
                 Console.WriteLine("{1} - {0} [{2}] ({3}) \r\nРейтинг: {4}/10", name, group, longtime, gogod, rate);
+            }
         }
         public void NewSong()
         {
@@ -87,14 +98,6 @@ namespace test
             Console.Clear();
             Console.WriteLine("~Новая песня добавлена в плейлист~\r\nНазвание: {0}\r\nГруппа: {1}\r\nДлительность: {2}\r\nГод выпуска: {3}\r\nРейтинг: {4}/10", name, group, longtime, gogod, rate);
             Console.ReadKey();
-        }
-        public void DelSong() //Удаление
-        {
-            name = null;
-            group = null;
-            longtime = null;
-            gogod = 0;
-            rate = 0;
         }
     }
 }
